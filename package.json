@@ -1,0 +1,41 @@
+{
+  "name": "react-native-webview-for-android",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "为了修复 ReactNative 的 WebView 组件在安卓端不支持文件上传而包装的一个 Webview 组件",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charleslo1/react-native-webview-for-android"
+  },
+  "license": "BSD-3-Clause",
+  "files": [
+    "index.js",
+    "AndroidWebView.js",
+    "android/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "peerDependencies": {
+    "react": "^15.3.2",
+    "react-native": "^0.40.0"
+  },
+  "dependencies": {
+    "keymirror": "^0.1.1",
+    "warning": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "jest": "18.1.0",
+    "react-test-renderer": "15.4.2"
+  }
+}
