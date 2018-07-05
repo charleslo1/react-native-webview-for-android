@@ -3,11 +3,10 @@
 
 <!-- MarkdownTOC -->
 
-- [Installation](#installation)
-  - [Manual Linking](#manual-linking)
-  - [Automatic Linking](#automatic-linking)
+- [Install](#installation)
+  - [手动 Linking](#manual-linking)
+  - [自动 Linking](#automatic-linking)
 - [Usage](#usage)
-- [Contributing](#contributing)
 
 <!-- /MarkdownTOC -->
 
