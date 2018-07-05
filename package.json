@@ -1,6 +1,6 @@
 {
   "name": "react-native-webview-for-android",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "description": "为了修复 ReactNative 的 WebView 组件在安卓端不支持文件上传而包装的一个 Webview 组件",
   "repository": {
