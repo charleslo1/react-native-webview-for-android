@@ -172,6 +172,14 @@ class AndroidWebView extends Component {
     );
   };
 
+  injectJavaScript = (data) => {
+    UIManager.dispatchViewManagerCommand(
+      this.getWebViewHandle(),
+      UIManager.RCTWebView.Commands.injectJavaScript,
+      [data],
+    );
+  };
+
   reload = () => {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewHandle(),

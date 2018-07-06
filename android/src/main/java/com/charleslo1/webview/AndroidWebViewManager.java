@@ -70,7 +70,7 @@ public class AndroidWebViewManager extends ReactWebViewManager {
                 try {
                     final Intent galleryIntent = new Intent(Intent.ACTION_PICK);
                     galleryIntent.setType("image/*");
-                    final Intent chooserIntent = Intent.createChooser(galleryIntent, "Choose File");
+                    final Intent chooserIntent = Intent.createChooser(galleryIntent, "选择文件");
                     module.getActivity().startActivityForResult(chooserIntent, 1);
                 } catch (Exception e) {
                     Log.d("customwebview", e.toString());
