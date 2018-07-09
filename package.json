@@ -23,6 +23,7 @@
     "react-native": "^0.40.0"
   },
   "dependencies": {
+    "escape-string-regexp": "^1.0.5",
     "keymirror": "^0.1.1",
     "warning": "^3.0.0"
   },

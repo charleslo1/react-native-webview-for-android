@@ -1,13 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule AndroidWebView
- */
 import React, {
   Component
 } from 'react';
@@ -23,24 +13,11 @@ import ReactNative, {
 import warning from 'warning';
 import keyMirror from 'keymirror';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import WebViewShared from './WebViewShared';
 
-/**
- * Adds a function for warning Users of deprecated prop use (when something was
- * valid in previous versions of a component, but not any more).
- *
- * In a fit of hilarious irony, the built in React deprecatedPropType used for
- *  warning users about deprecated PropTypes, has itself been deprecated, and
- *  this fact is terribly documented (or at least the SEO is subpar), with most
- *  of the "documentation" found through google being users being caught out by
- *  this change.
- *  https://facebook.github.io/react/warnings/dont-call-proptypes.html sort of
- *  contains a replacement, but not fully documented (e.g. no declaration of
- *  the 'warned' const). Finding the fix for this was a great experience
- *  all round, would recommend.
- */
 const warned = {};
 export default function deprecatedPropType(propType, explanation) {
-  return function validate(props, propName, componentName, ...rest) { // Note ...rest here
+  return function validate(props, propName, componentName, ...rest) {
     if (props[propName] != null) {
       const message = `"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`;
       if (!warned[message]) {
@@ -49,13 +26,11 @@ export default function deprecatedPropType(propType, explanation) {
       }
     }
 
-    return propType(props, propName, componentName, ...rest); // and here
+    return propType(props, propName, componentName, ...rest);
   };
 }
 
-
 const RCT_WEBVIEW_REF = 'AndroidWebView';
-
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +38,7 @@ const styles = StyleSheet.create({
   },
   hidden: {
     height: 0,
-    flex: 0, // disable 'flex:1' when hiding a View
+    flex: 0,
   },
   loadingView: {
     flex: 1,
@@ -90,13 +65,16 @@ const defaultRenderLoading = () => (
 );
 
 /**
- * Renders a native AndroidWebView that allows file upload.
+ * AndroidWebView component
  */
 class AndroidWebView extends Component {
 
   static defaultProps = {
     javaScriptEnabled: true,
+    thirdPartyCookiesEnabled: true,
     scalesPageToFit: true,
+    saveFormDataDisabled: false,
+    originWhitelist: WebViewShared.defaultOriginWhitelist,
   };
 
   state = {
@@ -118,7 +96,7 @@ class AndroidWebView extends Component {
   };
 
   onLoadingError = (event) => {
-    event.persist(); // persist this event because we need to store it
+    event.persist();
     const { onError, onLoadEnd } = this.props;
     onError && onError(event);
     onLoadEnd && onLoadEnd(event);
@@ -196,10 +174,6 @@ class AndroidWebView extends Component {
     );
   };
 
-  /**
-  * We return an event with a bunch of fields including:
-  *  url, title, loading, canGoBack, canGoForward
-  */
   updateNavigationState = (event) => {
     if (this.props.onNavigationStateChange) {
       this.props.onNavigationStateChange(event.nativeEvent);
@@ -224,7 +198,7 @@ class AndroidWebView extends Component {
     const webViewStyles = [styles.container, this.props.style];
     if (this.state.viewState === WebViewState.LOADING ||
       this.state.viewState === WebViewState.ERROR) {
-      // if we're in either LOADING or ERROR states, don't show the webView
+     
       webViewStyles.push(styles.hidden);
     }
 
