@@ -56,12 +56,16 @@ const WebViewState = keyMirror({
   ERROR: null,
 });
 
-const defaultRenderLoading = () => (
-  <View style={styles.loadingView}>
-    <ActivityIndicator
-      style={styles.loadingProgressBar}
-    />
-  </View>
+const defaultRenderLoading = () => ( <
+  View style = {
+    styles.loadingView
+  } >
+  <
+  ActivityIndicator style = {
+    styles.loadingProgressBar
+  }
+  /> <
+  /View>
 );
 
 /**
@@ -85,7 +89,9 @@ class AndroidWebView extends Component {
 
   componentWillMount() {
     if (this.props.startInLoadingState) {
-      this.setState({ viewState: WebViewState.LOADING });
+      this.setState({
+        viewState: WebViewState.LOADING
+      });
     }
   }
 
@@ -97,7 +103,10 @@ class AndroidWebView extends Component {
 
   onLoadingError = (event) => {
     event.persist();
-    const { onError, onLoadEnd } = this.props;
+    const {
+      onError,
+      onLoadEnd
+    } = this.props;
     onError && onError(event);
     onLoadEnd && onLoadEnd(event);
     console.warn('Encountered an error loading page', event.nativeEvent);
@@ -109,7 +118,10 @@ class AndroidWebView extends Component {
   };
 
   onLoadingFinish = (event) => {
-    const { onLoad, onLoadEnd } = this.props;
+    const {
+      onLoad,
+      onLoadEnd
+    } = this.props;
     onLoad && onLoad(event);
     onLoadEnd && onLoadEnd(event);
     this.setState({
@@ -119,7 +131,9 @@ class AndroidWebView extends Component {
   };
 
   onMessage = (event: Event) => {
-    const { onMessage } = this.props;
+    const {
+      onMessage
+    } = this.props;
     onMessage && onMessage(event);
   }
 
@@ -145,16 +159,14 @@ class AndroidWebView extends Component {
   postMessage = (data) => {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewHandle(),
-      UIManager.RCTWebView.Commands.postMessage,
-      [String(data)],
+      UIManager.RCTWebView.Commands.postMessage, [String(data)],
     );
   };
 
   injectJavaScript = (data) => {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewHandle(),
-      UIManager.RCTWebView.Commands.injectJavaScript,
-      [data],
+      UIManager.RCTWebView.Commands.injectJavaScript, [data],
     );
   };
 
@@ -188,9 +200,9 @@ class AndroidWebView extends Component {
     } else if (this.state.viewState === WebViewState.ERROR) {
       const errorEvent = this.state.lastErrorEvent;
       otherView = this.props.renderError && this.props.renderError(
-              errorEvent.domain,
-              errorEvent.code,
-              errorEvent.description);
+        errorEvent.domain,
+        errorEvent.code,
+        errorEvent.description);
     } else if (this.state.viewState !== WebViewState.IDLE) {
       console.error(`RCTWebView invalid state encountered: ${this.state.loading}`);
     }
@@ -198,7 +210,7 @@ class AndroidWebView extends Component {
     const webViewStyles = [styles.container, this.props.style];
     if (this.state.viewState === WebViewState.LOADING ||
       this.state.viewState === WebViewState.ERROR) {
-     
+
       webViewStyles.push(styles.hidden);
     }
 
